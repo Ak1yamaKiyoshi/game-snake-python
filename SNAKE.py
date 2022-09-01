@@ -27,14 +27,14 @@ def moveSnake(field, snakePos):
     y = snakePos[1]
 
     btn = input("wasd: ")
-    if btn == "w":
+    if btn[0:1] == "w":
         y -= 1
-    elif btn == 's':
+    elif btn[0:1] == 's':
         y += 1
-    elif btn == 'a':
+    elif btn[0:1] == 'a':
         x -= 1
-    elif btn == 'd':
-        x += 1
+    elif btn[0:1] == 'd':
+        x += 1    
 
     field[y][x] += 1
     snakePosHistory.append([y, x])
