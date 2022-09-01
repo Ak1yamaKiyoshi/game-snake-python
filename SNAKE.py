@@ -77,8 +77,8 @@ field[3][3] = 0
 snakePos = [4, 4]
 snakePosHistory = [[0, 0]]
 snakeLen = 1
-snakeTexture = ['e', 's', 'n', 'a', 'k']
-# snakeTexture = #['◧', '◩', '◨', '◪']  # ['$', '%', '#']
+snakeTexture = ['$', '%', '#']
+# snakeTexture = #['◧', '◩', '◨', '◪']  #  ['e', 's', 'n', 'a', 'k']
 
 field = spawnApple(field)
 while True:
