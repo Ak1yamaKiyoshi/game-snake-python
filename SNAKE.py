@@ -1,7 +1,7 @@
 from random import randint
 
 
-def draw(field):
+def draw(field, snakePos, snakeTexture):
     print("\n"*10)
     snakeTextureIndex = 0
     for y in range(len(field)):
@@ -82,7 +82,7 @@ snakeTexture = ['$', '%', '#']
 
 field = spawnApple(field)
 while True:
-    draw(field)
+    draw(field, snakePos, snakeTexture)
     field = clearSnakeTail(field, snakePosHistory, snakeLen)
     snakePos = moveSnake(field, snakePos)
 
