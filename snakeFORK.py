@@ -3,18 +3,14 @@ import os
 
 
 def draw(field, snakePos, snakeTexture):
-    snakeTextureIndex = 0
     for y in range(len(field)):
         print(" ")  # Separator
         for x in range(len(field[y])):
             if field[y][x] > 0:  # Snake skin Draw
-                snakeTextureIndex += 1
-                snakeTextureIndex = 0 if snakeTextureIndex > len(snakeTexture)-1 else snakeTextureIndex
                 if y == snakePos[1] and x == snakePos[0]:
                     print("▣", end=' ')
                 else:
-                    print((snakeTexture[snakeTextureIndex]
-                           ), end=" ")
+                    print("#", end=" ")
             elif field[y][x] == 0:  # Empty Space
                 print("·", end=" ")
             else:
@@ -87,7 +83,7 @@ btn = ['w', 'w']
 snakePos = [4, 4]
 snakePosHistory = [[4, 4], [4, 4]]
 snakeLen = 1
-snakeTexture = ['$', '%', '&', '#']
+snakeTexture = ['◁', '▷', '△', '▽']
 
 
 field = spawnApple(field)
