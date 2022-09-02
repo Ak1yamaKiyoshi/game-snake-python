@@ -9,18 +9,16 @@ def draw(field, snakePos, snakeTexture):
         for x in range(len(field[y])):
             if field[y][x] > 0:  # Snake skin Draw
                 snakeTextureIndex += 1
-                snakeTextureIndex = 0 if snakeTextureIndex > len(
-                    snakeTexture)-1 else snakeTextureIndex
+                snakeTextureIndex = 0 if snakeTextureIndex > len(snakeTexture)-1 else snakeTextureIndex
                 if y == snakePos[1] and x == snakePos[0]:
                     print("▣", end=' ')
                 else:
-                    # print("#", end=" ")
                     print((snakeTexture[snakeTextureIndex]
                            ), end=" ")
             elif field[y][x] == 0:  # Empty Space
                 print("·", end=" ")
             else:
-                print("@", end=" ")
+                print("O", end=" ")
 
 
 def moveSnake(field, snakePos, btn):
@@ -67,7 +65,7 @@ def spawnApple(field):
             if field[y][x] == 0:
                 fieldZeros.append([x, y])
     rNum = randint(0, len(fieldZeros)-1)
-    field[fieldZeros[rNum][1]][fieldZeros[rNum][0]] = -1
+    field[fieldZeros[rNum][1]][fieldZeros[rNum][0]] = -2
     return field
 
 
@@ -83,12 +81,14 @@ field = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
 ]
 
+
 field[3][3] = 0
 btn = ['w', 'w']
 snakePos = [4, 4]
 snakePosHistory = [[4, 4], [4, 4]]
-snakeLen = 2
-snakeTexture = ['$', '%', '#']
+snakeLen = 1
+snakeTexture = ['$', '%', '&', '#']
+
 
 field = spawnApple(field)
 while snakeLen < 100:
@@ -98,7 +98,7 @@ while snakeLen < 100:
     field = clearSnakeTail(field, snakePosHistory, snakeLen)
     snakePos = moveSnake(field, snakePos, btn)
 
-    if field[snakePos[1]][snakePos[0]] == 0:
+    if field[snakePos[1]][snakePos[0]] <= 0:
         snakeLen += 1
         field = spawnApple(field)
         field[snakePos[1]][snakePos[0]] = 1
