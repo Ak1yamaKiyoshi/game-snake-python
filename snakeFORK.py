@@ -14,7 +14,7 @@ def draw(field, snakePos, snakeTexture):
                 if y == snakePos[1] and x == snakePos[0]:
                     print("▣", end=' ')
                 else:
-                    #print("#", end=" ")
+                    # print("#", end=" ")
                     print((snakeTexture[snakeTextureIndex]
                            ), end=" ")
             elif field[y][x] == 0:  # Empty Space
@@ -23,26 +23,22 @@ def draw(field, snakePos, snakeTexture):
                 print("@", end=" ")
 
 
-def moveSnake(field, snakePos):
+def moveSnake(field, snakePos, btn):
     x = snakePos[0]
     y = snakePos[1]
+    del btn[0]
 
-    btn = input("wasd: ")
-    if len(btnHistory) > 2:
-        del btnHistory[0]
+    btn.append(input("wasd: "))
+    if btn[-1] == '':
+        btn[-1] = btn[-2]
 
-    if btn == '':
-        btn = btnHistory[-1]
-    else:
-        btnHistory.append(btn)
-
-    if btn[0:1] == "w":
+    if btn[-1][0:1] == "w":
         y -= 1
-    elif btn[0:1] == 's':
+    elif btn[-1][0:1] == 's':
         y += 1
-    elif btn[0:1] == 'a':
+    elif btn[-1][0:1] == 'a':
         x -= 1
-    elif btn[0:1] == 'd':
+    elif btn[-1][0:1] == 'd':
         x += 1
 
     x = 0 if x > 9 else x
@@ -88,18 +84,19 @@ field = [
 ]
 
 field[3][3] = 0
-btnHistory = []
+btn = ['w', 'w']
 snakePos = [4, 4]
 snakePosHistory = [[4, 4], [4, 4]]
 snakeLen = 2
 snakeTexture = ['$', '%', '#']
 
 field = spawnApple(field)
-while True:
+while snakeLen < 100:
+
     os.system('clear')
     draw(field, snakePos, snakeTexture)
     field = clearSnakeTail(field, snakePosHistory, snakeLen)
-    snakePos = moveSnake(field, snakePos)
+    snakePos = moveSnake(field, snakePos, btn)
 
     if field[snakePos[1]][snakePos[0]] == 0:
         snakeLen += 1
@@ -108,7 +105,6 @@ while True:
 
     if snakeLen == 100:
         print("Victory")
-        break
 
     if field[snakePos[1]][snakePos[0]] > 1:
         print("Game Over!")
