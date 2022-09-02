@@ -96,7 +96,7 @@ field[3][3] = 0  # starting position
 btn = ['w', 'w', 'w']  # needed for last direction move
 snakePos = [4, 4]
 snakePosHistory = [[4, 4], [4, 4]]  # needed for tail remove
-snakeLen = 55
+snakeLen = 1
 snakeTexture = ['🠴', '🠶', '🠵', '🠷', '#']
 
 
