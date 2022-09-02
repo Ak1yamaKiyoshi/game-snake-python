@@ -1,8 +1,8 @@
 from random import randint
+import os
 
 
 def draw(field, snakePos, snakeTexture):
-    print("\n"*10)
     snakeTextureIndex = 0
     for y in range(len(field)):
         print(" ")  # Separator
@@ -14,6 +14,7 @@ def draw(field, snakePos, snakeTexture):
                 if y == snakePos[1] and x == snakePos[0]:
                     print("▣", end=' ')
                 else:
+                    #print("#", end=" ")
                     print((snakeTexture[snakeTextureIndex]
                            ), end=" ")
             elif field[y][x] == 0:  # Empty Space
@@ -30,7 +31,7 @@ def moveSnake(field, snakePos):
     if len(btnHistory) > 2:
         del btnHistory[0]
 
-    if btn != 'w' and btn != 's' and btn != 'a' and btn != 'd':
+    if btn == '':
         btn = btnHistory[-1]
     else:
         btnHistory.append(btn)
@@ -43,6 +44,11 @@ def moveSnake(field, snakePos):
         x -= 1
     elif btn[0:1] == 'd':
         x += 1
+
+    x = 0 if x > 9 else x
+    x = 9 if x < 0 else x
+    y = 0 if y >= 9 else y
+    y = 8 if y < 0 else y
 
     field[y][x] += 1
     snakePosHistory.append([y, x])
@@ -60,8 +66,8 @@ def clearSnakeTail(field, snakePosHistory, snakeLen):
 
 def spawnApple(field):
     fieldZeros = []
-    for y in range(len(field)):
-        for x in range(len(field)):
+    for y in range(len(field)-1):
+        for x in range(len(field)-1):
             if field[y][x] == 0:
                 fieldZeros.append([x, y])
     rNum = randint(0, len(fieldZeros)-1)
@@ -90,6 +96,7 @@ snakeTexture = ['$', '%', '#']
 
 field = spawnApple(field)
 while True:
+    os.system('clear')
     draw(field, snakePos, snakeTexture)
     field = clearSnakeTail(field, snakePosHistory, snakeLen)
     snakePos = moveSnake(field, snakePos)
