@@ -6,11 +6,13 @@ def draw(field, snakePos, snakeTexture):
     for y in range(len(field)):
         print(" ")  # Separator
         for x in range(len(field[y])):
+
             if field[y][x] > 0:  # Snake skin Draw
                 if y == snakePos[1] and x == snakePos[0]:
                     print("▣", end=' ')
                 else:
                     print("#", end=" ")
+
             elif field[y][x] == 0:  # Empty Space
                 print("·", end=" ")
             else:
@@ -56,8 +58,8 @@ def clearSnakeTail(field, snakePosHistory, snakeLen):
 
 def spawnApple(field):
     fieldZeros = []
-    for y in range(len(field)-1):
-        for x in range(len(field)-1):
+    for y in range(len(field)):
+        for x in range(len(field[y])):
             if field[y][x] == 0:
                 fieldZeros.append([x, y])
     rNum = randint(0, len(fieldZeros)-1)
