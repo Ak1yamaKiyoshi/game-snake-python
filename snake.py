@@ -115,8 +115,8 @@ while snakeLen < 56:
         field[snakePos[1]][snakePos[0]] = 15
 
     if snakeLen == 56:
-        print("\n\t Victory \n")
+        print("\n\tVictory \n")
 
     if field[snakePos[1]][snakePos[0]] > 15:
-        print("Game Over!")
+        print('\033[91m' + "\n\tGame Over!\n")
         break
