@@ -96,12 +96,12 @@ field[3][3] = 0  # starting position
 btn = ['w', 'w', 'w']  # needed for last direction move
 snakePos = [4, 4]
 snakePosHistory = [[4, 4], [4, 4]]  # needed for tail remove
-snakeLen = 1
+snakeLen = 55
 snakeTexture = ['🠴', '🠶', '🠵', '🠷', '#']
 
 
 field = spawnApple(field)
-while snakeLen <= 56:
+while snakeLen < 56:
 
     os.system('clear')
     draw(field, snakePos, snakeTexture)
@@ -115,7 +115,7 @@ while snakeLen <= 56:
         field[snakePos[1]][snakePos[0]] = 15
 
     if snakeLen == 56:
-        print("Victory")
+        print("\n\t Victory \n")
 
     if field[snakePos[1]][snakePos[0]] > 15:
         print("Game Over!")
