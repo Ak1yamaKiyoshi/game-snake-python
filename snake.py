@@ -6,7 +6,8 @@ def draw(field, snakePos, snakeTexture):
     for y in range(len(field)):
         print(" ")  # Separator
         for x in range(len(field[y])):
-            if 16 > field[y][x] > 0:  # Snake skin Draw
+            # draw snake
+            if 16 > field[y][x] > 0:
                 if y == snakePos[1] and x == snakePos[0]:
                     print('\033[92m' + "●", end=' ')
                 else:
@@ -21,7 +22,7 @@ def draw(field, snakePos, snakeTexture):
                         print('\033[92m' + snakeTexture[3], end=' ')
                     elif field[y][x] == 15:
                         print('\033[92m' + snakeTexture[4], end=' ')
-
+            # draw field
             elif field[y][x] == 0:  # Empty Space
                 print("⠀", end=" ")
             elif field[y][x] == 20:  # Wall
@@ -32,13 +33,13 @@ def draw(field, snakePos, snakeTexture):
 
 def moveSnake(field, snakePos, btn):
     for _ in range(len(btn) - snakeLen):
-        del btn[0]
+        del btn[0]  # btn cleanup
 
     x = snakePos[0]
     y = snakePos[1]
 
     btn.append(input('\033[92m' + " w,a,s,d or enter: "))
-    if btn[-1] == '':
+    if btn[-1] == '':  # use last move
         btn[-1] = btn[-2]
 
     # left = 11 right = 12 up = 13 down = 14 len gained = 15
@@ -102,10 +103,11 @@ snakeTexture = ['🠴', '🠶', '🠵', '🠷', '#']
 
 field = spawnApple(field)
 while snakeLen < 56:
-
-    os.system('clear')
-    draw(field, snakePos, snakeTexture)
+    
     field = clearSnakeTail(field, snakePosHistory, snakeLen)
+    os.system('clear')
+
+    draw(field, snakePos, snakeTexture)
     print(f'\n Your Score: {snakeLen}/56 ')
     snakePos = moveSnake(field, snakePos, btn)
 
