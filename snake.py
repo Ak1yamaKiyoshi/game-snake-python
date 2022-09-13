@@ -1,3 +1,5 @@
+# замінити іфи на світчкейси
+
 from random import randint
 import os
 
