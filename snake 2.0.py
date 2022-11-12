@@ -2,6 +2,7 @@ from random import randint
 
 class Input():
     def getInp(self):
+
         inputdict = {"s":[1, 0], "w":[-1, 0], "a":[0, -1], "d":[0, 1]}
         curInput = input(" w/a/s/d/enter: ")
         try:
